@@ -26,6 +26,7 @@ mdc: true
 
 # Java 快速入门
 
+
 --- #2
 layout: center
 ---
@@ -234,10 +235,6 @@ public class HelloWorld {
 运行流程如下：
 <img src="/img/compile.png" class="h-full w-auto">
 
-
-
-
-
 <style>
 h1 {
     background-color: #2B90B6;
@@ -253,6 +250,91 @@ h1 {
 <!-- 在 IDEA 中编译执行只需要点一下绿色的播放按钮，剩下的工作都由 IDEA 来做 -->
 
 --- #9
+transition: fade-in
+---
+
+# Java 输入与输出
+
+```java {1-9|11-23|14-15|all}
+// 使用 System.out.println() 输出，代表输出后换行
+System.out.println("Hello World!");
+// 输出多个变量
+System.out.println("Integer: " + 10 + " Double: " + 3.14 + " Boolean: " + true);
+// 使用 System.out.print() 输出，代表输出后不换行
+System.out.print("Hello ");
+System.out.print("World");
+// 使用 System.out.printf() 输出，可以格式化输出
+System.out.printf("pi = %.5f", Math.PI); // => pi = 3.14159
+     
+// 使用 System.in 读取用户输入
+// 创建 Scanner 对象，用于接收用户输入，需要导入 java.util.Scanner 包
+Scanner scanner = new Scanner(System.in);
+// scanner.next() 和 scanner.nextLine() 方法用于接收用户输入的字符串，区别是 next() 遇到空格就结束，nextLine() 读取一整行
+String name = scanner.nextLine();
+// String name = scanner.nextLine();
+// 下面的方法用于接收用户输入的不同类型的数据
+byte numByte = scanner.nextByte();
+int numInt = scanner.nextInt();
+long numLong = scanner.nextLong();
+float numFloat = scanner.nextFloat();
+double numDouble = scanner.nextDouble();
+boolean bool = scanner.nextBoolean();
+```
+
+<style>
+h1 {
+    background-color: #2B90B6;
+    background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+</style>
+
+--- #9
+transition: fade-in
+---
+
+# Java 输入与输出
+
+```java {1|3-4|5-14|15-16|17-18}
+import java.util.Scanner;  // 导入Scanner类，用于接收输入
+
+public class InputOutputExample {
+    public static void main(String[] args) {
+        // 创建Scanner对象，用于接收用户输入
+        Scanner scanner = new Scanner(System.in);
+        // 提示用户输入姓名
+        System.out.print("请输入您的姓名: ");
+        // 使用Scanner对象的nextLine()方法接收用户输入的字符串
+        String name = scanner.nextLine();
+        // 提示用户输入年龄
+        System.out.print("请输入您的年龄: ");
+        // 使用Scanner对象的nextInt()方法接收用户输入的整数
+        int age = scanner.nextInt();
+        // 输出结果
+        System.out.println("您好，" + name + "！您的年龄是 " + age + " 岁。");
+        // 关闭Scanner对象
+        scanner.close();
+    }
+}
+```
+
+<style>
+h1 {
+    background-color: #2B90B6;
+    background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+</style>
+
+--- #10
 transition: fade-in
 ---
 
@@ -272,7 +354,7 @@ h1 {
   }
 </style>
 
---- #10
+--- #11
 transition: fade-in
 ---
 
@@ -294,13 +376,13 @@ h1 {
 
 <!-- 这里的数据范围没必要记，使用的时候考虑临界情况 -->
 
---- #11
+--- #12
 transition: fade-in
 ---
 
 # Java 数据类型
 
-```java
+```java {all|7,8|all}
 public class AllPrimitiveTypesExample {
     public static void main(String[] args) {
         
@@ -337,7 +419,7 @@ h1 {
   }
 </style>
 
---- #12
+--- #13
 transition: fade-in
 ---
 
@@ -358,7 +440,7 @@ h1 {
   }
 </style>
 
---- #13
+--- #14
 transition: fade-in
 ---
 
@@ -388,7 +470,7 @@ h1 {
   }
 </style>
 
---- #14
+--- #15
 transition: fade-in
 ---
 
