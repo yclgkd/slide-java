@@ -24,8 +24,40 @@ transition: slide-left
 mdc: true
 ---
 
-# Java 快速入门
 
+
+<!-- <div class="flex items-center justify-center">
+  <img src="/img/Java.svg" class="w-70">
+</div> -->
+
+# ***Java 急速入门***
+
+## 2024/6/28
+
+<style>
+h1 {
+  /*  字符笔画的宽和颜色  */
+  -webkit-text-stroke: 3px #ffcb4e;
+  /*  透明色  */
+  color: rgba(0,0,0,0);
+  /*  和 box-shadow 很像，给图像一个阴影  */
+  filter: drop-shadow(0 0 3px rgb(249, 187, 3, 0.7)) drop-shadow(0 0 15px #f9bb03);
+  /*  字母间更加紧凑  */
+  letter-spacing: -.02em;
+  margin: 0;
+  padding: 20px 0;
+  font-family: urbane-rounded;
+  font-size: 100px;
+}
+h2 {
+  color: #ff6859;
+  text-shadow: 0 0 20px #ff6859;
+  letter-spacing: -.02em;
+  margin: 0;
+  font-family: urbane-rounded;
+}
+
+</style>
 
 --- #2
 layout: center
