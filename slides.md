@@ -254,7 +254,7 @@ transition: fade-in
 
 # Hello World
 
-新建一个名为 HelloWorld.java 的文件（**文件名必须和类名一致**）
+新建一个名为 HelloWorld.java 的文件（<span v-mark.red>**文件名必须和类名一致**</span>）
 
 ```java {1|2|all}
 public class HelloWorld {
@@ -325,7 +325,7 @@ h1 {
   }
 </style>
 
---- #9
+--- #10
 transition: fade-in
 ---
 
@@ -366,7 +366,7 @@ h1 {
   }
 </style>
 
---- #10
+--- #11
 transition: fade-in
 ---
 
@@ -386,7 +386,7 @@ h1 {
   }
 </style>
 
---- #11
+--- #12
 transition: fade-in
 ---
 
@@ -408,24 +408,24 @@ h1 {
 
 <!-- 这里的数据范围没必要记，使用的时候考虑临界情况 -->
 
---- #12
+--- #13
 transition: fade-in
 ---
 
 # Java 数据类型
 
-```java {all|7,8|all}
+```java {all|3-5|8,9|all}
 public class AllPrimitiveTypesExample {
     public static void main(String[] args) {
-        
-        byte byteValue = 127;           // 字节类型
-        short shortValue = 32000;       // 短整型
-        int intValue = 2147483647;      // 整数类型
+        final byte byteValue = 127; // 字节类型，final 表示常量，一旦赋值就不能再修改
+        final short shortValue; // 短整型，没有初始化可以在后面赋值
+        shortValue = 32767; // 赋值后不可以再修改
+        int intValue = 2147483647; // 整数类型
         long longValue = 9223372036854775807L; // 长整型，注意结尾的 L 表示是 long 类型，避免使用小写 l，造成误解
-        float floatValue = 3.14f;       // 单精度浮点数，注意结尾的 f 表示是 float 类型，大写 F 也可以
-        double doubleValue = 3.14159;   // 双精度浮点数
-        boolean booleanValue = true;    // 布尔类型
-        char charValue = 'A';           // 字符类型
+        float floatValue = 3.14f; // 单精度浮点数，注意结尾的 f 表示是 float 类型，大写 F 也可以
+        double doubleValue = 3.14159; // 双精度浮点数
+        boolean booleanValue = true; // 布尔类型
+        char charValue = 'A'; // 字符类型
 
         System.out.println("字节值: " + byteValue);
         System.out.println("短整型值: " + shortValue);
@@ -451,7 +451,7 @@ h1 {
   }
 </style>
 
---- #13
+--- #14
 transition: fade-in
 ---
 
@@ -472,7 +472,7 @@ h1 {
   }
 </style>
 
---- #14
+--- #15
 transition: fade-in
 ---
 
@@ -502,7 +502,7 @@ h1 {
   }
 </style>
 
---- #15
+--- #16
 transition: fade-in
 ---
 
@@ -532,6 +532,303 @@ System.out.println("强制类型转换: " + byteValue); // 结果是 -1，因为
 // 截取最后一个字节就是 11111111，它代表的是一个有符号的 8 位二进制数，在二进制补码表示中表示 -1
 ```
 
+
+<style>
+h1 {
+    background-color: #2B90B6;
+    background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+</style>
+
+--- #17
+transition: fade-in
+---
+
+# Java 中的数组
+
+```java {3-6|8-11|13-14|16-21|all}
+public class ArrayExample {
+    public static void main(String[] args) {
+      // 数组的第一种定义方式
+      int[] intArray = new int[10];
+      String[] stringArray = new String[1];
+      boolean boolArray[] = new boolean[100];
+
+      // 数组的第二种定义方式
+      int[] y = {9000, 1000, 1337};
+      String names[] = {"Bob", "John", "Fred", "Juan Pedro"};
+      boolean bools[] = {true, false, false};
+
+      // 多维数组的声明和初始化
+      int[][] matrix = {{1, 2, 3},{4, 5, 6},{7, 8, 9}};
+
+      // 访问数组元素
+      System.out.println("intArray @ 0: " + intArray[0]);
+
+      // 修改数组元素
+      intArray[1] = 1;
+      System.out.println("intArray @ 1: " + intArray[1]); // => 1
+    }
+}
+
+```
+
+<style>
+h1 {
+    background-color: #2B90B6;
+    background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+</style>
+
+--- #18
+transition: fade-in
+---
+
+# Java 中的 if 判断
+
+````md magic-move
+```java
+public class IfStatementExample {
+    public static void main(String[] args) {
+        // 声明一个字符串变量并赋值为 null
+        String str = null;
+
+        // 使用 if 判断语句检查字符串是否为空
+        if (str == null) {
+            System.out.println("字符串为空");
+        } else {
+            System.out.println("字符串不为空");
+        }
+
+        // 尝试比较字符串 str 和 "Hello"，会抛出空指针异常
+        try {
+            if (str.equals("Hello")) { // 这里会抛出 NullPointerException
+                System.out.println("字符串内容相同");
+            } else {
+                System.out.println("字符串内容不同");
+            }
+        } catch (NullPointerException e) {
+            System.out.println("发生空指针异常：字符串为 null");
+        }
+    }
+}
+```
+```java
+public class IfStatementExample {
+    public static void main(String[] args) {
+        // 声明一个字符串变量并赋值为 null
+        String str = null;
+
+        // 使用 if 判断语句检查字符串是否为空
+        if (str == null) {
+            System.out.println("字符串为空");
+        } else {
+            System.out.println("字符串不为空");
+        }
+  
+        // 使用 && 运算符避免空指针异常
+        if (str != null && str.equals("Hello")) {
+            System.out.println("字符串内容相同");
+        } else {
+            System.out.println("字符串内容不同");
+        }
+    }
+}
+```
+````
+
+<style>
+h1 {
+    background-color: #2B90B6;
+    background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+</style>
+
+--- #19
+transition: fade-in
+---
+
+# Java 中的循环
+
+````md magic-move
+```java
+public class LoopExample {
+    public static void main(String[] args) {
+        // while 循环
+        int j = 0;
+        while (j < 5) {
+            System.out.println("while 循环: " + j);
+            j++;
+        }
+
+        // do-while 循环
+        int k = 0;
+        do {
+            System.out.println("do-while 循环: " + k);
+            k++;
+        } while (k < 5);
+    }
+}
+```
+```java
+public class LoopExample {
+    public static void main(String[] args) {
+        // for 循环
+        for (int i = 0; i < 5; i++) {
+            System.out.println("for 循环: " + i);
+        }
+        
+        // 使用标签跳出循环
+        outer:
+        for (int i = 0; i < 10; i++) {
+          for (int j = 0; j < 10; j++) {
+            if (i == 5 && j ==5) {
+              // 使用标签跳出外层循环
+              break outer;
+            }
+          }
+        }
+
+        // for each 循环遍历数组
+        int[] fooList = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        for (int bar : fooList) {
+            System.out.println(bar);
+        }
+    }
+}
+```
+```java
+public class LoopExample {
+    public static void main(String[] args) {
+       for (int i=1; i<=10; i++) {
+            System.out.println("i = " + i);
+            for (int j=1; j<=10; j++) {
+                System.out.println("j = " + j);
+                if (j >= i) {
+                    break;
+                }
+            }
+            // break跳到这里
+            System.out.println("breaked");
+        }
+    }
+}
+```
+```java
+public class LoopExample {
+    public static void main(String[] args) {
+       int sum = 0;
+        for (int i=1; i<=10; i++) {
+            System.out.println("begin i = " + i);
+            if (i % 2 == 0) {
+                continue; // continue语句会结束本次循环
+            }
+            sum = sum + i;
+            System.out.println("end i = " + i);
+        }
+        System.out.println(sum); // 25
+    }
+}
+```
+````
+
+<style>
+h1 {
+    background-color: #2B90B6;
+    background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+</style>
+
+--- #20
+transition: fade-in
+---
+
+# Java 中的 Switch 语句
+<v-click>使用switch时，如果遗漏了break，就会造成严重的逻辑错误，而且不易在源代码中发现错误。从Java 12开始，switch语句升级为更简洁的表达式语法，使用类似模式匹配（Pattern Matching）的方法，保证只有一种路径会被执行，并且不需要break语句</v-click>
+````md magic-move
+```java {all}
+public class Main {
+    public static void main(String[] args) {
+        int option = 2;
+        switch (option) {
+        case 1:
+            System.out.println("Selected 1");
+            break;
+        case 2:
+        case 3:
+            System.out.println("Selected 2, 3");
+            break;
+        default:
+            System.out.println("Not selected");
+            break;
+        }
+    }
+}
+```
+```java
+// switch表达式
+public class Main {
+    public static void main(String[] args) {
+        String fruit = "orange";
+        int opt = switch (fruit) {
+            // case 语句返回值，这里不需要 break，因为 switch 语句会自动结束
+            case "apple" -> 1;
+            case "pear", "mango" -> 2;
+            // 如果需要复杂的语句块，可以使用 {} 包裹
+            default -> {
+                int code = fruit.hashCode();
+                yield code; // switch语句返回值
+            }
+        };
+        System.out.println("opt = " + opt);
+    }
+}
+```
+````
+
+<style>
+h1 {
+    background-color: #2B90B6;
+    background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+</style>
+
+--- #21
+transition: fade-in
+layout: section
+---
+
+# 面向对象编程
+
+<div class="flex flex-row">
+  <img src="/img/OOP1.png">
+  <img src="/img/OOP2.png">
+</div>
 
 <style>
 h1 {
