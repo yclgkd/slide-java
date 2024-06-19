@@ -1226,3 +1226,241 @@ h1 {
     -moz-text-fill-color: transparent;
   }
 </style>
+
+--- #27
+transition: fade-in
+---
+
+# Java 类中的方法重写
+
+方法重写是指子类重新定义父类的方法，方法名、参数列表和返回值类型都必须与父类中的方法一致
+
+````md magic-move
+```java
+class Person {
+    public void run() {
+        System.out.println("Person run");
+    }
+}
+class Student extends Person {
+    // @Override 注解表示这个方法是重写父类的方法，如果方法名写错或者参数列表不一致，编译器会报错
+    @Override // 重写父类的方法
+    public void run() {
+        System.out.println("Student run");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Person p = new Student();
+        p.run(); // Student run
+    }
+}
+```
+```java
+class Person {
+    public void run() {
+        System.out.println("Person run");
+    }
+}
+class Student extends Person {
+    @Override // 重写父类的方法
+    public void run() {
+        System.out.println("Student run");
+    }
+    public void study() {
+        System.out.println("Student study");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Person p = new Student();
+        p.run(); // Student run
+        // ❌️ 编译错误，因为父类引用不能调用子类特有的方法
+        // p.study();
+    }
+}
+```
+```java
+class Person {
+    public void run() {
+        System.out.println("Person run");
+    }
+    public final void hello() { // final 修饰的方法不能被重写
+        System.out.println("Person hello");
+    }
+}
+class Student extends Person {
+    @Override // 重写父类的方法
+    public void run(String s) { // ❌️ 编译错误，因为父类没有 run(String s) 方法，方法签名不同
+        System.out.println("Student run");
+    }
+    @Override
+    public void study() { // ❌️ 编译错误，因为父类没有 study 方法
+        System.out.println("Student study");
+    }
+    @Override
+    public void hello() { // ❌️ 编译错误，因为父类的 hello 方法被 final 修饰，不能被重写
+        System.out.println("Student hello");
+    }
+}
+```
+````
+
+<style>
+h1 {
+    background-color: #2B90B6;
+    background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+</style>
+
+--- #28
+transition: fade-in
+---
+
+# 方法重写和方法重载的区别
+
+| 方法重载(Overload) | 方法重写(Override) |
+| --- | --- |
+| 方法名相同，参数列表不同 | 方法名相同，参数列表相同 |
+| 返回值类型通常是相同的 | 返回值类型必须相同 |
+| 可以在同一个类中 | 一般在父类和子类中 |
+| 编译器根据参数列表选择调用 | 运行时根据对象类型选择调用 |
+| 重载是静态绑定 | 重写是动态绑定 |
+
+<style>
+h1 {
+    background-color: #2B90B6;
+    background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+</style>
+
+--- #29
+transition: fade-in
+---
+
+# Java 中的多态
+
+- 多态是指同一个方法调用，由于对象不同可能会有不同的行为，即一个引用变量指向不同类型的对象，调用相同方法时会产生不同的行为。 
+- 多态的实现需要<span v-mark.red>继承</span>、<span v-mark.red>方法重写(Override)</span>和<span v-mark.red>父类引用指向子类对象(向上转型)</span>
+- 多态的好处是可以使程序变得更加灵活，可以在不修改原有代码的情况下增加新的功能
+
+<style>
+h1 {
+    background-color: #2B90B6;
+    background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+</style>
+
+--- #30
+transition: fade-in
+---
+
+# Java 中的多态
+
+````md magic-move
+```java
+// 给一个有普通收入、工资收入和享受国务院特殊津贴的小伙伴算税
+// 普通收入
+class Income {
+    protected double income;
+    public Income(double income) {
+        this.income = income;
+    }
+    public double getTax() {
+        return income * 0.1; // 税率10%
+    }
+}
+// 工资收入
+class Salary extends Income {
+    public Salary(double income) {
+        super(income);
+    }
+    @Override
+    public double getTax() {
+        if (income <= 5000) {
+            return 0;
+        }
+        return (income - 5000) * 0.2;
+    }
+}
+```
+```java
+// 给一个有普通收入、工资收入和享受国务院特殊津贴的小伙伴算税
+// 普通收入
+class Income {
+    protected double income;
+    public Income(double income) {
+        this.income = income;
+    }
+    public double getTax() {
+        return income * 0.1; // 税率10%
+    }
+}
+// ...
+// 国务院特殊津贴
+class StateCouncilSpecialAllowance extends Income {
+    public StateCouncilSpecialAllowance(double income) {
+        super(income);
+    }
+    @Override
+    public double getTax() {
+        return 0;
+    }
+}
+```
+```java
+public class Main {
+    public static void main(String[] args) {
+        // 给一个有普通收入、工资收入和享受国务院特殊津贴的小伙伴算税:
+        Income[] incomes = new Income[] {
+            new Income(3000),
+            new Salary(7500),
+            new StateCouncilSpecialAllowance(15000)
+        };
+        System.out.println(totalTax(incomes));
+    }
+
+    public static double totalTax(Income... incomes) {
+        double total = 0;
+        for (Income income: incomes) {
+            total = total + income.getTax();
+        }
+        return total;
+    }
+}
+```
+````
+
+<style>
+h1 {
+    background-color: #2B90B6;
+    background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+</style>
+
+--- #31
+transition: fade-in
+layout: end
+---
+
+# 谢谢观看😃
