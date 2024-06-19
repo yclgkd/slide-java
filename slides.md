@@ -841,3 +841,228 @@ h1 {
     -moz-text-fill-color: transparent;
   }
 </style>
+
+--- #22
+transition: fade-in
+---
+
+# Java 类中的成员变量和方法
+
+````md magic-move
+```java {all|3,9-24|4,10-12,20-23|5,13-14|6,13-14,15-19|all}
+public class Main {
+    public static void main(String[] args) {
+        Person ming = new Person();
+        ming.setName("Xiao Ming"); // 设置name
+        ming.age = 18; // 设置age
+        System.out.println(ming.getName() + ", " + ming.age);
+    }
+}
+class Person {
+    // 不带作用域修饰符，表示包访问权限，即同一个包中的其他类可以访问
+    // 作用域修饰符 private 表示私有，外部无法访问，只有本类内部可以访问
+    private String name;
+    // 作用域修饰符 public 表示公开的，外部可以访问
+    public int age;
+    // public 表示公开的，外部可以调用
+    public String getName() {
+        // this 指向当前实例，这里因为没有冲突 this 可以省略
+        return this.name;
+    }
+    public void setName(String name) {
+        // 如果有局部变量和字段重名，那么局部变量优先级更高，就必须加上this，少了 this 就是局部变量
+        this.name = name;
+    }
+}
+```
+```java
+public class Main {
+    public static void main(String[] args) {
+        System.out.println(sum(1, 2, 3, 4, 5)); // 15
+    }
+    // 方法中的可变参数
+    public static int sum(int... ns) {
+        int sum = 0;
+        // 可变参数在方法内部是一个数组，可以用for each循环遍历
+        for (int n : ns) {
+            sum = sum + n;
+        }
+        return sum;
+    }
+}
+```
+````
+
+<style>
+h1 {
+    background-color: #2B90B6;
+    background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+</style>
+
+--- #23
+transition: fade-in
+---
+
+# Java 类中的构造方法
+
+````md magic-move
+```java {all|3,13-17,8-9|4,10-12|all}
+public class Main {
+    public static void main(String[] args) {
+        Person p1 = new Person("Xiao Ming", 15); // 调用带参数的构造方法
+        Person p2 = new Person(); // 调用无参数构造方法
+    }
+}
+class Person {
+    private String name; // 默认初始化为null
+    private int age; // 默认初始化为0
+    // 无参数构造方法，也叫默认构造方法，如果什么构造方法都不写，编译器会自动加上一个无参数构造方法
+    public Person() {
+    }
+    // 带参数的构造方法，可以初始化name和age，初始化后优先级高于默认值；如果有多个构造方法，可以根据参数个数和类型区分
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    public String getName() {
+        return this.name;
+    }
+    public int getAge() {
+        return this.age;
+    }
+}
+```
+```java {4}
+public class Main {
+    public static void main(String[] args) {
+        Person p1 = new Person("Xiao Ming", 15); // 既可以调用带参数的构造方法
+        Person p2 = new Person(); // 类中只有带参数的构造方法，那么还可以调用无参数构造方法吗❓️🕵‍♀
+    }
+}
+class Person {
+    private String name; // 默认初始化为null
+    private int age; // 默认初始化为0
+    // 带参数的构造方法，可以初始化name和age，初始化后优先级高于默认值；如果有多个构造方法，可以根据参数个数和类型区分
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    public String getName() {
+        return this.name;
+    }
+    public int getAge() {
+        return this.age;
+    }
+}
+```
+````
+
+<style>
+h1 {
+    background-color: #2B90B6;
+    background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+</style>
+
+--- #24
+transition: fade-in
+---
+
+# Java 类中的方法重载
+
+方法名相同，功能类似，但各自的参数不同，称为方法<span v-mark.circle.red>重载</span>（Overload）
+  
+```java
+public class Main {
+    public static void main(String[] args) {
+        System.out.println(sum(1, 2)); // 3
+        System.out.println(sum(1, 2, 3)); // 6
+        System.out.println(sum(1, 2, 3, 4)); // 10
+    }
+    // 方法重载
+    public int sum(int a, int b) {
+        return a + b;
+    }
+    public int sum(int a, int b, int c) {
+        return a + b + c;
+    }
+    public int sum(int a, int b, int c, int d) {
+        return a + b + c + d;
+    }
+}
+```
+
+<style>
+h1 {
+    background-color: #2B90B6;
+    background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+</style>
+
+--- #25
+transition: fade-in
+---
+
+# Java 类中的继承
+
+```java
+// 写一个 java 类中继承的例子
+public class Main {
+    public static void main(String[] args) {
+        Student s = new Student("Xiao Ming", 12, 89);
+        System.out.println(s.getName() + ", " + s.getAge() + ", " + s.getScore());
+    }
+}
+class Person {
+    private String name;
+    private int age;
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    public String getName() {
+        return this.name;
+    }
+    public int getAge() {
+        return this.age;
+    }
+}
+class Student extends Person {
+    private int score;
+    public Student(String name, int age, int score) {
+        super(name, age); // 调用父类的构造方法
+        this.score = score;
+    }
+    public int getScore() {
+        return this.score;
+    }
+}
+```
+
+<style>
+h1 {
+    background-color: #2B90B6;
+    background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+</style>
