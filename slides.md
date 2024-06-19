@@ -32,7 +32,7 @@ mdc: true
 
 # ***Java 急速入门***
 
-## 2024/6/28
+## 2024/6/20
 
 <style>
 h1 {
@@ -1021,15 +1021,9 @@ transition: fade-in
 
 # Java 类中的继承
 
-```java
-// 写一个 java 类中继承的例子
-public class Main {
-    public static void main(String[] args) {
-        Student s = new Student("Xiao Ming", 12, 89);
-        System.out.println(s.getName() + ", " + s.getAge() + ", " + s.getScore());
-    }
-}
-class Person {
+````md magic-move
+```java{1|1-14|15|15-24}
+class sealed Person permits Student { // 使用 sealed 修饰类，表示这个类只能被 Student 继承
     private String name;
     private int age;
     public Person(String name, int age) {
@@ -1043,10 +1037,10 @@ class Person {
         return this.age;
     }
 }
-class Student extends Person {
+class final Student extends Person { // 子类继承了父类所有的字段和方法，注意：构造方法不会被继承且子类不能继承父类的私有字段和方法
     private int score;
     public Student(String name, int age, int score) {
-        super(name, age); // 调用父类的构造方法
+        super(name, age); // 调用父类的构造方法，初始化name和age，这里必须写在第一行
         this.score = score;
     }
     public int getScore() {
@@ -1054,6 +1048,172 @@ class Student extends Person {
     }
 }
 ```
+```java{2|22-24}
+class sealed Person permits Student { // 使用 sealed 修饰类，表示这个类只能被 Student 继承
+    protected String name;
+    private int age;
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    public String getName() {
+        return this.name;
+    }
+    public int getAge() {
+        return this.age;
+    }
+}
+class final Student extends Person { // 子类继承了父类所有的字段和方法，注意：构造方法不会被继承且子类不能继承父类的私有字段和方法
+    private int score;
+    public Student(String name, int age, int score) {
+        super(name, age); // 调用父类的构造方法，初始化name和age，这里必须写在第一行
+        this.score = score;
+    }
+    // ...
+    public void hello() {
+        System.out.println("Hello, " + super.name); // super 一个指向父类实例的特殊引用，这里用this也可以
+    }
+}
+```
+```java{15-25}
+class Person { // 使用 sealed 修饰类，表示这个类只能被 Student 继承
+    private String name;
+    private int age;
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    public String getName() {
+        return this.name;
+    }
+    public int getAge() {
+        return this.age;
+    }
+}
+class final Student extends Person { // 子类继承了父类所有的字段和方法，注意：构造方法不会被继承且子类不能继承父类的私有字段和方法
+    private int score;
+    public Student(String name, int age, int score) {
+        // 如果没有调用父类的构造方法，编译器会自动加上
+        // super();
+        this.score = score;
+    }
+    public int getScore() {
+        return this.score;
+    }
+}
+```
+```java{15-25}
+class Person { // 使用 sealed 修饰类，表示这个类只能被 Student 继承
+    private String name;
+    private int age;
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    public String getName() {
+        return this.name;
+    }
+    public int getAge() {
+        return this.age;
+    }
+}
+class final Student extends Person { // 子类继承了父类所有的字段和方法，注意：构造方法不会被继承且子类不能继承父类的私有字段和方法
+    private int score;
+    public Student(String name, int age, int score) {
+        // ❌️ 编译错误，因为父类没有无参数构造方法
+        // super(); 编译器会自动加上
+        this.score = score;
+    }
+    public int getScore() {
+        return this.score;
+    }
+}
+```
+```java {1-6}
+public class Main {
+    public static void main(String[] args) {
+        Student s = new Student("Xiao Ming", 12, 89);
+        System.out.println(s.getName() + ", " + s.getAge() + ", " + s.getScore());
+    }
+}
+// ...
+class final Student extends Person { // 子类继承了父类所有的字段和方法，注意：构造方法不会被继承且子类不能继承父类的私有字段和方法
+    private int score;
+    public Student(String name, int age, int score) {
+        super(name, age); // 调用父类的构造方法，初始化name和age，这里必须写在第一行，如果没有写，编译器会自动加上 super()
+        this.score = score;
+    }
+    public int getScore() {
+        return this.score;
+    }
+}
+```
+````
+
+<style>
+h1 {
+    background-color: #2B90B6;
+    background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+</style>
+
+--- #26
+transition: fade-in
+---
+
+# Java 类中的向上转型和向下转型
+
+````md magic-move
+```java
+public class Main {
+    public static void main(String[] args) {
+        Person p = new Student("Xiao Ming", 12, 89); // 向上转型
+        System.out.println(p.getName() + ", " + p.getAge());
+        Student s = (Student) p; // 向下转型
+        System.out.println(s.getName() + ", " + s.getAge() + ", " + s.getScore());
+    }
+}
+```
+```java
+// 向下转型失败
+public class Main {
+    public static void main(String[] args) {
+        Person p = new Person("Xiao Ming", 12);
+        Student s = (Student) p; // ❌️ 编译通过，运行时会抛出 ClassCastException 异常
+        System.out.println(s.getName() + ", " + s.getAge() + ", " + s.getScore());
+    }
+}
+```
+```java
+// 安全的向下转型
+public class Main {
+    public static void main(String[] args) {
+        Person p = new Student("Xiao Ming", 12, 89);
+        if (p instanceof Student) { // 判断 p 是否是 Student 的实例
+            Student s = (Student) p; // 向下转型
+            System.out.println(s.getName() + ", " + s.getAge() + ", " + s.getScore());
+        }
+    }
+}
+```
+```java
+// 安全的向下转型
+public class Main {
+    public static void main(String[] args) {
+        Person p = new Student("Xiao Ming", 12, 89);
+        // 从Java 14开始，判断instanceof后，可以直接转型为指定变量，避免再次强制转型
+        if (p instanceof Student s) { // 判断 p 是否是 Student 的实例
+            System.out.println(s.getName() + ", " + s.getAge() + ", " + s.getScore());
+        }
+    }
+}
+```
+````
 
 <style>
 h1 {
