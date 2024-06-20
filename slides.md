@@ -894,6 +894,25 @@ class Person {
     }
 }
 ```
+```java {10-17|1-8}
+public class Main {
+    public static void main(String[] args) {
+        // 调用静态方法不需要实例
+        Person.setNumber(99);
+        // 类名.静态字段来访问静态对象
+        System.out.println(Person.number);
+    }
+}
+
+class Person {
+    // 静态字段属于所有实例“共享”的字段，实际上是属于class的字段
+    public static int number;
+    // 静态方法属于class而不属于实例，因此，静态方法内部，无法访问this变量，也无法访问实例字段，它只能访问静态字段
+    public static void setNumber(int value) {
+        number = value;
+    }
+}
+```
 ```java
 public class Main {
     public static void main(String[] args) {
