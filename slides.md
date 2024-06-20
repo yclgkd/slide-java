@@ -522,16 +522,34 @@ public class TypeConversionExample {
     }
 }
 ```
-
+<v-click>
 需要注意的是，强制类型转换可能会造成数据丢失，例如：
+</v-click>
 
+<v-click>
+````md magic-move
 ```java
 int intValue = 2147483647;
+// byte 类型的范围是 -128 到 127
+byte byteValue = (byte) intValue;
+System.out.println("强制类型转换: " + byteValue);
+```
+```java
+int intValue = 2147483647;
+// byte 类型的范围是 -128 到 127
+byte byteValue = (byte) intValue;
+System.out.println("强制类型转换: " + byteValue); // 结果是 -1，因为 byte 类型的范围是 -128 到 127
+```
+```java
+int intValue = 2147483647;
+// byte 类型的范围是 -128 到 127
 byte byteValue = (byte) intValue;
 System.out.println("强制类型转换: " + byteValue); // 结果是 -1，因为 byte 类型的范围是 -128 到 127
 // 2147483647 的二进制表示是 01111111 11111111 11111111 11111111
 // 截取最后一个字节就是 11111111，它代表的是一个有符号的 8 位二进制数，在二进制补码表示中表示 -1
 ```
+````
+</v-click>
 
 
 <style>
@@ -598,7 +616,7 @@ transition: fade-in
 # Java 中的 if 判断
 
 ````md magic-move
-```java
+```java {all|13-22}
 public class IfStatementExample {
     public static void main(String[] args) {
         // 声明一个字符串变量并赋值为 null
@@ -1461,7 +1479,284 @@ h1 {
 
 --- #31
 transition: fade-in
+---
+
+# Java 中的抽象类
+
+<v-clicks>
+
+- 抽象类是不能被实例化的类，只能被继承
+- 抽象类中可以包含抽象方法，抽象方法是没有方法体的方法，只有方法声明，没有方法体
+- 抽象类中的抽象方法**必须**被子类实现，否则子类也必须是抽象类
+- 抽象类中可以包含普通方法，普通方法有方法体，但是抽象类中至少有一个抽象方法
+- 抽象类中可以包含成员变量，构造方法，静态方法等
+- 抽象类中的构造方法不能用来实例化对象，只能被子类调用，用来初始化子类的实例
+
+</v-clicks>
+
+<style>
+h1 {
+    background-color: #2B90B6;
+    background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+</style>
+
+--- #32
+transition: fade-in
+---
+
+# Java 中的抽象类
+
+````md magic-move
+```java
+// 抽象类
+abstract class Person {
+    private String name;
+    public Person(String name) {
+        this.name = name;
+    }
+    public String getName() {
+        return this.name;
+    }
+    // 抽象方法
+    public abstract int getAge();
+}
+// 继承抽象类
+class Student extends Person {
+    private int age;
+    public Student(String name, int age) {
+        super(name);
+        this.age = age;
+    }
+    // 实现抽象方法
+    @Override
+    public int getAge() {
+        return this.age;
+    }
+}
+```
+```java
+public class Main {
+    public static void main(String[] args) {
+        Person p = new Student("Xiao Ming", 12);
+        System.out.println(p.getName() + ", " + p.getAge());
+    }
+}
+```
+````
+
+<style>
+h1 {
+    background-color: #2B90B6;
+    background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+</style>
+
+
+--- #33
+transition: fade-in
+---
+
+# Java 中的接口
+
+<v-clicks>
+
+- 接口是抽象方法的集合，接口中的方法都是抽象方法，没有方法体
+- 接口中的方法默认是 public abstract，可以省略
+- 接口中不能有实例字段，但可以有静态常量字段，字段默认是 public static final，可以省略
+- 接口中的方法不能有方法体，不能有构造方法，因为接口不是类
+- 接口可以继承多个接口
+- 一个类可以实现多个接口，但只能继承一个类
+
+</v-clicks>
+
+<style>
+h1 {
+    background-color: #2B90B6;
+    background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+</style>
+
+--- #34
+transition: fade-in
+---
+
+# Java 中的接口
+
+````md magic-move
+```java {1-4|5-12}
+interface Person {
+    // 接口中的方法默认是 public abstract，可以省略
+    void run();
+}
+// 实现接口
+class Student implements Person {
+    // 实现接口的方法
+    @Override
+    public void run() {
+        System.out.println("Student run");
+    }
+}
+```
+```java {5-7|9|10-14|15-18}
+interface Person {
+    // 接口中的方法默认是 public abstract，可以省略
+    void run();
+}
+interface Hello {
+    void hello();
+}
+// 实现多个接口
+class Student implements Person, Hello {
+    // 实现接口的方法
+    @Override
+    public void run() {
+        System.out.println("Student run");
+    }
+    @Override
+    public void hello() {
+        System.out.println("Hello");
+    }
+}
+```
+```java {5-6}
+interface Person {
+    // 接口中的方法默认是 public abstract，可以省略
+    void run();
+}
+// 接口继承接口
+interface Hello extends Person {
+    void hello();
+}
+// 实现接口
+class Student implements Hello {
+    // 实现接口的方法
+    @Override
+    public void run() {
+        System.out.println("Student run");
+    }
+    @Override
+    public void hello() {
+        System.out.println("Hello");
+    }
+}
+```
+```java {8-12|3-4}
+public class Main {
+    public static void main(String[] args) {
+        Person p = new Student("Xiao Ming");
+        p.run();
+    }
+}
+interface Person {
+    String getName();
+    String ACTION = "run"; // 接口中的字段默认是 public static final，可以省略
+    default void run() { // 接口中的默认方法
+        System.out.println(getName() + ACTION);
+    }
+}
+class Student implements Person {
+    private String name;
+    public Student(String name) {
+        this.name = name;
+    }
+    public String getName() {
+        return this.name;
+    }
+}
+```
+````
+
+<style>
+h1 {
+    background-color: #2B90B6;
+    background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+</style>
+
+<!-- 实现类可以不必覆写default方法。default方法的目的是，当我们需要给接口新增一个方法时，会涉及到修改全部子类。如果新增的是default方法，那么子类就不必全部修改，只需要在需要覆写的地方去覆写新增方法。 -->
+
+--- #35
+transition: fade-in
+---
+
+# Java 中的接口和抽象类的区别
+
+| 特点                   | 接口                               | 抽象类                             |
+|----------------------|------------------------------------|------------------------------------|
+| 定义关键字           | `interface`                        | `abstract class`                   |
+| 继承                 | 继承一个或多个接口                    | 可以继承一个抽象类，同时实现多个接口   |
+| 构造方法             | 不能有构造方法                       | 可以有构造方法，供子类调用              |
+| 方法                 | 可以包含抽象方法、默认方法、静态方法   | 可以包含抽象方法、普通方法、静态方法     |
+| 成员变量             | 只能是静态常量，不能有实例变量      | 可以有各种类型的成员变量                |
+| 扩展性               | 更灵活，易于替换和扩展                | 更具体，包含部分实现，可作为子类的模板    |
+
+
+<style>
+h1 {
+    background-color: #2B90B6;
+    background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+</style>
+
+
+--- #36
+transition: fade-in
+---
+
+# Java 面向抽象编程
+
+<v-clicks>
+
+- 上层代码只定义规范，例如使用接口或抽象类
+- 不需要子类就可以实现业务逻辑（正常编译）
+- 具体的业务逻辑由不同的子类实现，调用者并不关心，利用的是多态性，向上转型
+- 降低耦合度，提高代码的灵活性和可维护性
+
+</v-clicks>
+
+<style>
+h1 {
+    background-color: #2B90B6;
+    background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+</style>
+
+--- #37
+transition: fade-in
 layout: end
 ---
 
 # 谢谢观看😃
+
+该幻灯片可以在👉[java-tutorial.vercel.app](java-tutorial.vercel.app)上查看
