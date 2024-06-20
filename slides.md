@@ -255,10 +255,10 @@ transition: fade-in
 
 # Hello World
 
-新建一个名为 HelloWorld.java 的文件（<span v-mark.red>**文件名必须和类名一致**</span>）
+新建一个名为 Hello.java 的文件（<span v-mark.red>**文件名必须和类名一致**</span>）
 
 ```java {1|2|all}
-public class HelloWorld {
+public class Hello {
     public static void main(String[] args) {
         System.out.println("Hello, world!");
     }
