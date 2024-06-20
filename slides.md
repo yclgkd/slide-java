@@ -91,7 +91,7 @@ h1 {
 
 --- #3
 layout: image-right
-image: /public/James.png
+image: James.png
 backgroundSize: 20em 80%
 ---
 
@@ -223,7 +223,7 @@ Java ME就和Java SE不同，它是一个针对嵌入式设备的“瘦身版”
 --- #7
 transition: fade-in
 layout: image-left
-image: /public/IDEA.png
+image: IDEA.png
 
 ---
 
