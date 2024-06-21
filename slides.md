@@ -415,7 +415,7 @@ transition: fade-in
 
 # Java 数据类型
 
-```java {all|3-5|8,9|all}
+```java {all|3-5|7-8|all}
 public class AllPrimitiveTypesExample {
     public static void main(String[] args) {
         final byte byteValue = 127; // 字节类型，final 表示常量，一旦赋值就不能再修改
@@ -724,9 +724,9 @@ public class LoopExample {
         }
 
         // for each 循环遍历数组
-        int[] fooList = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-        for (int bar : fooList) {
-            System.out.println(bar);
+        int[] ns = { 1, 4, 9, 16, 25 };
+        for (int n : ns) {
+            System.out.println(n);
         }
     }
 }
@@ -1114,7 +1114,7 @@ class final Student extends Person { // 子类继承了父类所有的字段和�
 }
 ```
 ```java{15-25}
-class Person { // 使用 sealed 修饰类，表示这个类只能被 Student 继承
+class Person {
     private String name;
     private int age;
     public Person(String name, int age) {
