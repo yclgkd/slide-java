@@ -7,11 +7,10 @@ favicon: /img/favicon.png
 background: https://images.unsplash.com/photo-1484417894907-623942c8ee29?q=80&w=2664&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
 # some information about your slides, markdown enabled
 title: Java 急速入门
-info: |
-  ## Slidev Starter Template
-  Presentation slides for developers.
-
-  Learn more at [Sli.dev](https://sli.dev)
+info: false
+author: Brian Yao<me@brianyao.tech>
+# keywords field for exported PDF, comma-delimited.
+keywords: Java 急速入门
 # apply any unocss classes to the current slide
 class: text-center
 # https://sli.dev/custom/highlighters.html
@@ -23,6 +22,8 @@ drawings:
 transition: slide-left
 # enable MDC Syntax: https://sli.dev/guide/syntax#mdc-syntax
 mdc: true
+presenter: dev
+record: dev
 ---
 
 
