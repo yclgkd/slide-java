@@ -18,6 +18,7 @@ highlighter: shiki
 # https://sli.dev/guide/drawing
 drawings:
   persist: false
+  enabled: dev
 # slide transition: https://sli.dev/guide/animations#slide-transitions
 transition: slide-left
 # enable MDC Syntax: https://sli.dev/guide/syntax#mdc-syntax
