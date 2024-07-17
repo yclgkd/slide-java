@@ -25,6 +25,7 @@ transition: slide-left
 mdc: true
 presenter: dev
 record: dev
+contextMenu: dev
 ---
 
 
